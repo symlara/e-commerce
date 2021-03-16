@@ -24,15 +24,15 @@ router.get('/', (req, res) => {
         model: Tag,
         attributes: ['tag_name'],
         through: ProductTag,
-        as: 'tagsId'
+        as: 'tagIds'
       }
     ]
   })
   .then(dbProductData => res.json(dbProductData))
-  .catch(err =>{
-    console.log(err);
-    res.json(500).json(err);
-  });
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 // get one product
@@ -49,32 +49,35 @@ router.get('/:id', (req, res) => {
       'stock',
       'category_id'
     ],
-      // be sure to include its associated Category and Tag data
-      include: [
-        {
-          model: Category,
-          attributes: ['category_name']
-        },
-        {
-          model: Tag,
-          attributes: ['tag_name'],
-          through: ProductTag,
-          as: 'tagsId'
-        }
-      ]
-    })
-    .then(dbProductData => {
-      //did product match id
-      if (!dbProductData) {
-        res.status(404).json({ message: 'No product found with this id.'});
-        return;
+    // be sure to include its associated Category and Tag data
+    include: [
+      {
+        model: Category,
+        attributes: ['category_name']
+      },
+      {
+        model: Tag,
+        attributes: ['tag_name'],
+        through: ProductTag,
+        as: 'tagIds'
       }
-      res.json(dbProductData);
-    })
-    .catch(err => {
+    ]
+  })
+  .then(dbProductData => {
+    // see if a product matched the id
+    if(!dbProductData) {
+        // if not, send a respone
+        res.status(404).json({ message: 'No product found with this id'});
+        return;
+    }
+    // if so, send the data
+    res.json(dbProductData);
+  })
+  // if there is an err catch it and send a response
+  .catch(err => {
       console.log(err);
-      res.status(500).json(err);
-    });
+      res.status(500).json(err)
+  });
 });
 
 // create new product
@@ -155,20 +158,24 @@ router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
   Product.destroy({
     where: {
-      id: req.params.id
+        id: req.params.id
     }
   })
+  // send a reply back as JSON
   .then(dbProductData => {
-    // see if a product matches this id
-    if (!dbProductData) {
-      res.status(404).json({ messsage: 'No product found with this id'});
-      return;
-    }
-    res.json(dbProductData);
+      // see if a product matched the id
+      if(!dbProductData) {
+          // if not, send a respone
+          res.status(404).json({ message: 'No product found with this id'});
+          return;
+      }
+      // if so, send the data
+      res.json(dbProductData);
   })
+  // if there is an err catch it and send a response
   .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
+      console.log(err);
+      res.status(500).json(err)
   });
 });
 
