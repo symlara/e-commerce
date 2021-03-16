@@ -1,0 +1,24 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/symlara/e-commerce.git"
+  },
+  "author": "aaliyah symlar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/symlara/e-commerce/issues"
+  },
+  "homepage": "https://github.com/symlara/e-commerce#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.5.1"
+  }
+}
