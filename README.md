@@ -11,4 +11,4 @@ This backend code can be used to create an e-commerce app or website. It can als
 
 ## Usage
 Here's a link to a walkthrough video on testing the application: 
-<a href="https://youtu.be/U30dEetILNU">E-Commerce back-end</a>
+<a href="https://youtu.be/80-qpcEa894">E-Commerce back-end</a>
