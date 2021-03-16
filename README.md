@@ -11,6 +11,4 @@ This backend code can be used to create an e-commerce app or website. It can als
 
 ## Usage
 Here's a link to a walkthrough video on testing the application: 
-<video width="320" height="240" controls>
-  <source src="e-commerce back-end.mp4" type="video/mp4">
-</video>
+
